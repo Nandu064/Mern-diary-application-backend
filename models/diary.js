@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
-const DiarySchema = mongoose.Schema(
+const DiarySchema = new mongoose.Schema(
   {
-    user_id: { type: Schema.Types.ObjectId, ref: "users" },
-    page_id: [{ type: Schema.Types.ObjectId, ref: "pages" }],
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    page_id: [{ type: mongoose.Schema.Types.ObjectId, ref: "pages" }],
     name: String,
-    year: Number,
+    year: String,
     caption: String,
   },
   { timestamps: true }

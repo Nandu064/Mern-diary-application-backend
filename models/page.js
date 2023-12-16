@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
-const PageSchema = mongoose.Schema(
+const PageSchema = new mongoose.Schema(
   {
-    user_id: { type: Schema.Types.ObjectId, ref: "users" },
-    diary_id: { type: Schema.Types.ObjectId, ref: "diary" },
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+    diary_id: { type: mongoose.Schema.Types.ObjectId, ref: "diary" },
     content: String,
   },
   { timestamps: true }

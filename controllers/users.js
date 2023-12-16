@@ -18,10 +18,10 @@ exports.addUsers = async (req, res) => {
       data.password = hash;
       const existingUser = await UserSchema.find({ username });
       if (existingUser.length > 0) {
-        res.status(500).json("Username already taken");
+        res.status(500).json({ message: "Username already taken" });
       } else {
         let doc = new UserSchema(data).save();
-        res.status(200).json("User registered successfully");
+        res.status(200).json({ message: "User registered successfully" });
       }
     } else {
       res.status(500).json(err.message);
@@ -42,16 +42,16 @@ exports.login = async (req, res) => {
     const { username, password } = req.body;
     const existingUser = await UserSchema.find({ username });
     if (!(existingUser.length > 0)) {
-      res.status(404).json("User not found");
+      res.status(404).json({ message: "User not found" });
     } else {
       bcrypt.compare(
         password,
         existingUser[0]?.password,
         function (err, result) {
           if (result) {
-            res.status(200).json("Login successful");
+            res.status(200).json(existingUser?.[0]);
           } else {
-            res.status(500).json("Password does not match");
+            res.status(500).json({ message: "Password does not match" });
           }
         }
       );
